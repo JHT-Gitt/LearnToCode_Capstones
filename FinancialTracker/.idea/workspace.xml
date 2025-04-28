@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="063ca4ce-6dbb-4f38-9694-6e0df95d7cd4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Tracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Tracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/transactions.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,21 +26,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "JHT-Gitt"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JHT-Gitt&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/JHT-Gitt/LearnToCode_Capstones.git",
-    "accountId": "e82c7899-495b-4e7b-84cf-28a13e8bfff6"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JHT-Gitt/LearnToCode_Capstones.git&quot;,
+    &quot;accountId&quot;: &quot;e82c7899-495b-4e7b-84cf-28a13e8bfff6&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2wEig4BsiEKtKlNoCYWrnLXUP8D" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
