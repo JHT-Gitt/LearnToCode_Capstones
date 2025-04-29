@@ -2,6 +2,8 @@ package org.example;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Tracker {
@@ -11,7 +13,7 @@ public class Tracker {
     public static ArrayList<Entries> entry = new ArrayList<>();
 
     public static ArrayList<Entries> showEntry(String file){
-       // entry.clear();
+
         try{
             BufferedReader buff = new BufferedReader(new FileReader(file));
             buff.readLine();
@@ -79,9 +81,9 @@ public class Tracker {
                 input = scanner.next().toLowerCase();
 
                 if(input.equalsIgnoreCase("D")){
-                    addDeposit();
+                    addDeposits("transactions.csv");
                 }else if (input.equalsIgnoreCase("P")){
-                    makePayment();
+                    makePayment("transactions.csv");
                 }else if (input.equalsIgnoreCase("L")) {
                     ledger();
                 }else if(input.equalsIgnoreCase("X")){
@@ -131,15 +133,6 @@ public class Tracker {
             }
         }
     }
-    public static void addDeposit(){
-        System.out.println("\ndeposits nah yet");
-        menu();
-    }
-    public static void makePayment(){
-        System.out.println("\npaymenttt nah yet");
-        menu();
-    }
-
     public static void showAllEntry(){
         System.out.println("\n-------------------ALL ENTRIES----------------------------------");
         System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
@@ -174,6 +167,117 @@ public class Tracker {
         }
         System.out.println("-----------------------------------------------------------------");
         isToLedger();
+    }
+    public static void addDeposits(String file) {
+        float amount;
+        LocalDate today = LocalDate.now();
+        LocalTime time = LocalTime.now();
+        String dateToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String timeToday = time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        try {
+            scanner.nextLine();
+            System.out.print("\nEnter description: ");
+            String desc = scanner.nextLine();
+            System.out.print("Enter Vendor name: ");
+            String vendor = scanner.nextLine();
+            while (true) {
+                System.out.print("Enter the amount you want to deposit: ");
+                try {
+                    amount = scanner.nextFloat();
+                    scanner.nextLine();
+                    if (amount < 0) {
+                        System.out.println("Amount cannot be negative. Please enter a valid amount.");
+                        continue;
+                    }
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("\nInvalid input for amount. Please enter a valid number.");
+                    scanner.nextLine();
+                }
+            }
+        //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
+            Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
+            entry.add(addEntry);
+            BufferedWriter buff = new BufferedWriter(new FileWriter(file));
+            buff.write("date|time|description|vendor|amount");
+            buff.newLine();
+            for (Entries entries : entry) {
+                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
+             buff.newLine();
+             }
+            System.out.println("\nDeposit Added !");
+            buff.close();
+
+        } catch (IOException e) {
+            System.out.println("\nError");
+        }
+        returned();
+    }
+    public static void makePayment(String file){
+        float amount;
+        LocalDate today = LocalDate.now();
+        LocalTime time = LocalTime.now();
+        String dateToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String timeToday = time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        try {
+            scanner.nextLine();
+            System.out.print("\nEnter description: ");
+            String desc = scanner.nextLine();
+            System.out.print("Enter Vendor name: ");
+            String vendor = scanner.nextLine();
+            while (true) {
+                System.out.print("Enter the amount you want to pay: ");
+                try {
+                    amount = scanner.nextFloat();
+                    scanner.nextLine();
+                    if (amount < 0) {
+                        System.out.println("Amount cannot be negative. Please enter a valid amount.");
+                        continue;
+                    }else{
+                        amount = -amount;
+                    }
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("\nInvalid input for amount. Please enter a valid number.");
+                    scanner.nextLine();
+                }
+            }
+            //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
+            Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
+            entry.add(addEntry);
+            BufferedWriter buff = new BufferedWriter(new FileWriter(file));
+            buff.write("date|time|description|vendor|amount");
+            buff.newLine();
+            for (Entries entries : entry) {
+                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
+                buff.newLine();
+            }
+            System.out.println("\nPayment Success !");
+            buff.close();
+
+        } catch (IOException e) {
+            System.out.println("\nError");
+        }
+        returned();
+    }
+    public static void returned(){
+        boolean isTrue = false;
+        System.out.println("\nDo you want to Pay again ?\n P - Payment \n H - Home Screen \n X - Exit");
+        while(!isTrue) {
+            System.out.print("\nEnter : ");
+            String enter = scanner.nextLine();
+            if (enter.equalsIgnoreCase("P")) {
+                makePayment("transactions.csv");
+                isTrue = true;
+            } else if (enter.equalsIgnoreCase("H")) {
+                Tracker.menu();
+                isTrue = true;
+            } else if (enter.equalsIgnoreCase("X")) {
+                System.exit(0);
+            } else {
+                System.out.println("\nInvalid input. Try again");
+            }
+        }
     }
 
 }
