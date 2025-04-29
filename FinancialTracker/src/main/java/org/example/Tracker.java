@@ -258,11 +258,32 @@ public class Tracker {
         } catch (IOException e) {
             System.out.println("\nError");
         }
-        returned();
+        payBack();
     }
     public static void returned(){
         boolean isTrue = false;
+        System.out.println("\nDo you want to deposit again ?\n D - Deposit \n H - Home Screen \n X - Exit");
+
+        while(!isTrue) {
+            System.out.print("\nEnter : ");
+            String enter = scanner.nextLine();
+            if (enter.equalsIgnoreCase("D")) {
+                addDeposits("transactions.csv");
+                isTrue = true;
+            } else if (enter.equalsIgnoreCase("H")) {
+                Tracker.menu();
+                isTrue = true;
+            } else if (enter.equalsIgnoreCase("X")) {
+                System.exit(0);
+            } else {
+                System.out.println("\nInvalid input. Try again");
+            }
+        }
+    }
+    public static void payBack(){
+        boolean isTrue = false;
         System.out.println("\nDo you want to Pay again ?\n P - Payment \n H - Home Screen \n X - Exit");
+
         while(!isTrue) {
             System.out.print("\nEnter : ");
             String enter = scanner.nextLine();
