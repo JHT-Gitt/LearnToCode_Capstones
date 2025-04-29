@@ -8,8 +8,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Report {
-    public static String file = "transasctions.csv";
-   public static ArrayList<Entries> entry = Tracker.showEntry(file);
+    //public static String file = "transactions.csv";
+   public static ArrayList<Entries> entry = Tracker.showEntry("transaction.csv");
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -173,7 +173,7 @@ public static void report() {
                 String name = entries.getVendor().toLowerCase();
                 if (vendor.equalsIgnoreCase(name)) {
                     if (!isFound) {
-                        System.out.println("\n-------------------PREVIOUS YEAR ENTRIES------------------------");
+                        System.out.println("\n----------------------------VENDOR------------------------------");
                         System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
                         isFound = true;
                     }

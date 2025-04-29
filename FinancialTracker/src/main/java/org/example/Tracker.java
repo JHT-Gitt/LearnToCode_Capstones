@@ -11,7 +11,7 @@ public class Tracker {
     public static ArrayList<Entries> entry = new ArrayList<>();
 
     public static ArrayList<Entries> showEntry(String file){
-
+       // entry.clear();
         try{
             BufferedReader buff = new BufferedReader(new FileReader(file));
             buff.readLine();
@@ -132,10 +132,11 @@ public class Tracker {
         }
     }
     public static void addDeposit(){
-
+        System.out.println("\ndeposits nah yet");
+        menu();
     }
     public static void makePayment(){
-        System.out.println("pay,emt nah yet");
+        System.out.println("\npaymenttt nah yet");
         menu();
     }
 
