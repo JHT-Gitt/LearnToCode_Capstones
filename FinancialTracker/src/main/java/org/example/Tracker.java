@@ -198,13 +198,14 @@ public class Tracker {
         //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
             Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
             entry.add(addEntry);
-            BufferedWriter buff = new BufferedWriter(new FileWriter(file));
-            buff.write("date|time|description|vendor|amount");
-            buff.newLine();
-            for (Entries entries : entry) {
-                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
-             buff.newLine();
-             }
+            BufferedWriter buff = new BufferedWriter(new FileWriter(file, true));
+//            buff.write("date|time|description|vendor|amount");
+//            buff.newLine();
+//            for (Entries entries : entry) {
+//                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
+//             buff.newLine();
+//             }
+            buff.write(String.format("\n%s|%s|%s|%s|%.2f",addEntry.getDate(),addEntry.getTime(),addEntry.getDescription(),addEntry.getVendor(),addEntry.getAmount()));
             System.out.println("\nDeposit Added !");
             buff.close();
 
@@ -242,16 +243,16 @@ public class Tracker {
                     scanner.nextLine();
                 }
             }
-            //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
             Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
             entry.add(addEntry);
-            BufferedWriter buff = new BufferedWriter(new FileWriter(file));
-            buff.write("date|time|description|vendor|amount");
-            buff.newLine();
-            for (Entries entries : entry) {
-                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
-                buff.newLine();
-            }
+            BufferedWriter buff = new BufferedWriter(new FileWriter(file,true));
+//            buff.write("date|time|description|vendor|amount");
+//            buff.newLine();
+//            for (Entries entries : entry) {
+//                buff.write(String.format("%s|%s|%s|%s|%.2f", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount()));
+//                buff.newLine();
+//            }
+            buff.write(String.format("\n%s|%s|%s|%s|%.2f",addEntry.getDate(),addEntry.getTime(),addEntry.getDescription(),addEntry.getVendor(),addEntry.getAmount()));
             System.out.println("\nPayment Success !");
             buff.close();
 

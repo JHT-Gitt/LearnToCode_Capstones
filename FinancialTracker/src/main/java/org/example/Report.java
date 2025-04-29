@@ -24,6 +24,7 @@ public static void report() {
     System.out.println(" 3 - Year To Date(YTD)");
     System.out.println(" 4 - Previous Year");
     System.out.println(" 5 - Search by Vendor");
+    System.out.println(" 6 - Custom Search");
     System.out.println(" 0 - Back to Ledger Screen");
     System.out.println("-----------------------------");
 
@@ -51,8 +52,11 @@ public static void report() {
                 case 5:
                     searchVendor();
                     break;
+                case 6:
+                    customSearch();
+                    break;
                 default:
-                    System.out.println("\nInvalid choice ! Choose only between 0 and 5");
+                    System.out.println("\nInvalid choice ! Choose only between 0 and 6");
             }
         } catch (InputMismatchException e) {
             System.out.println("\nInvalid Input");
@@ -60,6 +64,12 @@ public static void report() {
         }
     }
 }
+
+    private static void customSearch() {
+
+
+    }
+
     public static void backToReport(){
     boolean isTrue = false;
         System.out.println("\n--------------------");
