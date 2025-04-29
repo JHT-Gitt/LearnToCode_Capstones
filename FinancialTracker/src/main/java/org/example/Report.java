@@ -184,11 +184,11 @@ public static void report() {
             }
             System.out.println("----------------------------------------------------------------");
             if (!isFound) {
-                System.out.println("\n             Vendor's name/company not found");
-                System.out.println("\n----------------------------------------------------------------");
+                System.out.println("             Vendor's name/company not found");
+                System.out.println("----------------------------------------------------------------");
             }
         }
        backToReport();
     }
-    
+
 }
