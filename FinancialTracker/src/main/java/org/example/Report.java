@@ -25,7 +25,7 @@ public static void report() {
     System.out.println(" 4 - Previous Year");
     System.out.println(" 5 - Search by Vendor");
     System.out.println(" 0 - Back to Ledger Screen");
-    System.out.println("----------------------------");
+    System.out.println("-----------------------------");
 
     while (!isTrue) {
         try {
@@ -62,7 +62,7 @@ public static void report() {
 }
     public static void backToReport(){
     boolean isTrue = false;
-        System.out.println("\n-------------------");
+        System.out.println("\n--------------------");
         System.out.println(" H - Home Screen");
         System.out.println(" L - Ledger Screen");
         System.out.println(" R - Report Screen");
@@ -157,26 +157,38 @@ public static void report() {
 
     public static void searchVendor() {
     boolean isFound = false;
-        scanner.nextLine();
-        System.out.print("\nEnter Vendors name/company: ");
-        String vendor = scanner.nextLine().toLowerCase();
+    boolean isTrue = false;
 
-        System.out.println("\n-------------------PREVIOUS YEAR ENTRIES------------------------");
-        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
-        for(Entries entries : entry){
-            String name = entries.getVendor().toLowerCase();
-            if(vendor.equalsIgnoreCase(name)){
-                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
-                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
-                isFound=true;
+        System.out.println("\nX - Return to Report Screen");
+        scanner.nextLine();
+        while(!isTrue) {
+
+            System.out.print("Enter Vendors name/company: ");
+            String vendor = scanner.nextLine().toLowerCase();
+            if(vendor.equalsIgnoreCase("x")){
+                isTrue = true;
+                report();
             }
-        }
-        System.out.println("----------------------------------------------------------------");
-        if(!isFound){
-            System.out.println("\nVendor's name/company not found");
+            for (Entries entries : entry) {
+                String name = entries.getVendor().toLowerCase();
+                if (vendor.equalsIgnoreCase(name)) {
+                    if (!isFound) {
+                        System.out.println("\n-------------------PREVIOUS YEAR ENTRIES------------------------");
+                        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+                        isFound = true;
+                    }
+                    System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                            entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                    isTrue = true;
+                }
+            }
+            System.out.println("----------------------------------------------------------------");
+            if (!isFound) {
+                System.out.println("\n             Vendor's name/company not found");
+                System.out.println("\n----------------------------------------------------------------");
+            }
         }
        backToReport();
     }
-
-
+    
 }

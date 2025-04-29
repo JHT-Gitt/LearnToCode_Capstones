@@ -88,7 +88,7 @@ public class Tracker {
                     System.out.println("\nGoodbye");
                     System.exit(0);
                 }else{
-                    System.out.println("Invalid input");
+                    System.out.println("\nInvalid input! Try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nError ! Invalid Input !");
