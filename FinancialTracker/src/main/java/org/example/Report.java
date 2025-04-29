@@ -1,4 +1,6 @@
 package org.example;
+import org.w3c.dom.CDATASection;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public static void report() {
 
     boolean isTrue = false;
 
-    System.out.println("\n-------REPORT SCREEN--------   ");
+    System.out.println("\n-------REPORTS SCREEN--------   ");
     System.out.println("Search by:");
     System.out.println(" 1 - Month To Date(MTD)");
     System.out.println(" 2 - Previous Month");
@@ -58,6 +60,36 @@ public static void report() {
         }
     }
 }
+    public static void backToReport(){
+    boolean isTrue = false;
+        System.out.println("\n-------------------");
+        System.out.println(" H - Home Screen");
+        System.out.println(" L - Ledger Screen");
+        System.out.println(" R - Report Screen");
+        System.out.println(" X - Exit");
+        System.out.println("--------------------");
+    while(!isTrue){
+        try{
+        System.out.print("\nEnter your choice: ");
+        String choice = scanner.next();
+        if(choice.equalsIgnoreCase("H")){
+            Tracker.menu();
+        }else if(choice.equalsIgnoreCase("L")){
+            Tracker.ledger();
+        }else if(choice.equalsIgnoreCase("R")){
+            report();
+        }else if(choice.equalsIgnoreCase("X")){
+            System.exit(0);
+        }else{
+            System.out.println("\nInvalid input ! Try again");
+        }
+        }catch (InputMismatchException e) {
+            System.out.println("\nError ! Invalid Input !");
+            scanner.nextLine();
+        }
+        }
+
+    }
     public static void monthToDate() {
         LocalDate now = LocalDate.now();
         System.out.println("\n-------------------MONTH TO DATE ENTRIES------------------------");
@@ -65,15 +97,29 @@ public static void report() {
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if (dateCompare.getMonth().equals(now.getMonth()) && dateCompare.getYear() == now.getYear()) {
-                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
             }
         }
         System.out.println("----------------------------------------------------------------");
-        report();
+        backToReport();
     }
     public static void prevMonth() {
-        System.out.println("heyprevmonth");
-        report();
+        LocalDate now = LocalDate.now();
+        LocalDate previousMonth = now.minusMonths(1);
+        System.out.println("\n-------------------PREVIOUS MONTH ENTRIES------------------------");
+        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+
+        for(Entries entries : entry){
+            LocalDate dateCompare = LocalDate.parse(entries.getDate());
+            if(dateCompare.getMonth() == previousMonth.getMonth() && dateCompare.getYear() == now.getYear()) {
+                    System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                            entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                }
+
+        }
+        System.out.println("----------------------------------------------------------------");
+        backToReport();
     }
 
     public static void yearToDate() {
@@ -85,21 +131,51 @@ public static void report() {
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if (dateCompare.getYear() == now.getYear()) {
-                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
             }
         }
         System.out.println("----------------------------------------------------------------");
-        report();
+        backToReport();
     }
 
     public static void prevYear() {
-        System.out.println("hey prevyear");
-        report();
+        LocalDate now = LocalDate.now();
+        LocalDate previousYear = now.minusYears(1);
+        System.out.println("\n-------------------PREVIOUS YEAR ENTRIES------------------------");
+        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+        for (Entries entries : entry) {
+            LocalDate dateCompare = LocalDate.parse(entries.getDate());
+            if(dateCompare.getYear() == previousYear.getYear()){
+                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+            }
+        }
+        System.out.println("----------------------------------------------------------------");
+        backToReport();
     }
 
     public static void searchVendor() {
-        System.out.println("hey vendor");
-        report();
+    boolean isFound = false;
+        scanner.nextLine();
+        System.out.print("\nEnter Vendors name/company: ");
+        String vendor = scanner.nextLine().toLowerCase();
+
+        System.out.println("\n-------------------PREVIOUS YEAR ENTRIES------------------------");
+        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+        for(Entries entries : entry){
+            String name = entries.getVendor().toLowerCase();
+            if(vendor.equalsIgnoreCase(name)){
+                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n",
+                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                isFound=true;
+            }
+        }
+        System.out.println("----------------------------------------------------------------");
+        if(!isFound){
+            System.out.println("\nVendor's name/company not found");
+        }
+       backToReport();
     }
 
 
