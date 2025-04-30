@@ -135,12 +135,12 @@ public class Tracker {
         return text.length() <= maxLength ? text : text.substring(0, maxLength - 3) + "...";
     }
     public static void showAllEntry(){
+        boolean hasEntries = false;
         System.out.println("\n-----------------------------ALL ENTRIES----------------------------------");
-       // System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry){
-          //  System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(),entries.getAmount());
+            hasEntries = true;
             System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                     entries.getDate(),
                     entries.getTime(),
@@ -149,17 +149,20 @@ public class Tracker {
                     entries.getAmount());
         }
         System.out.println("--------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         isToLedger();
     }
     public static void showDeposits(){
+        boolean hasEntries = false;
         System.out.println("\n----------------------------  DEPOSITS  ----------------------------------");
-        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry) {
             if (entries.getAmount() > 0) {
-                //System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(),
                         entries.getTime(),
@@ -169,17 +172,20 @@ public class Tracker {
             }
         }
         System.out.println("--------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         isToLedger();
     }
     public static void showPayments(){
+        boolean hasEntries = false;
         System.out.println("\n----------------------------  PAYMENTS  ----------------------------------");
-        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry) {
             if (entries.getAmount() < 0) {
-                //System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(),
                         entries.getTime(),
@@ -189,6 +195,9 @@ public class Tracker {
             }
         }
         System.out.println("--------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         isToLedger();
     }
     public static void addDeposits(String file) {

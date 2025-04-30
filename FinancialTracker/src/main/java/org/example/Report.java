@@ -250,16 +250,15 @@ public static void report() {
         backToReport();
     }
     public static void monthToDate() {
+        boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         System.out.println("\n---------------------------MONTH TO DATE ENTRIES------------------------");
-        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if (dateCompare.getMonth().equals(now.getMonth()) && dateCompare.getYear() == now.getYear()) {
-//                System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n",
-//                        entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(), entries.getTime(),
                         Tracker.truncate(entries.getDescription(), 25),
@@ -267,36 +266,46 @@ public static void report() {
             }
         }
         System.out.println("------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         backToReport();
     }
     public static void prevMonth() {
+    boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         LocalDate previousMonth = now.minusMonths(1);
         System.out.println("\n-------------------------PREVIOUS MONTH ENTRIES--------------------------");
-       // System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry){
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if(dateCompare.getMonth() == previousMonth.getMonth() && dateCompare.getYear() == now.getYear()) {
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(), entries.getTime(),
                         Tracker.truncate(entries.getDescription(), 25),
                         Tracker.truncate(entries.getVendor(), 15),entries.getAmount());
                 }
         }
+
         System.out.println("-------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         backToReport();
     }
     public static void yearToDate() {
+        boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         System.out.println("\n----------------------------YEAR TO DATE ENTRIES-------------------------");
-        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for (Entries entries : entry) {
+
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if (dateCompare.getYear() == now.getYear()) {
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(), entries.getTime(),
                         Tracker.truncate(entries.getDescription(), 25),
@@ -304,18 +313,22 @@ public static void report() {
             }
         }
         System.out.println("-------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         backToReport();
     }
     public static void prevYear() {
+        boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         LocalDate previousYear = now.minusYears(1);
         System.out.println("\n--------------------------PREVIOUS YEAR ENTRIES--------------------------");
-       // System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if(dateCompare.getYear() == previousYear.getYear()){
+                hasEntries = true;
                 System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
                         entries.getDate(), entries.getTime(),
                         Tracker.truncate(entries.getDescription(), 25),
@@ -323,6 +336,9 @@ public static void report() {
             }
         }
         System.out.println("-------------------------------------------------------------------------");
+        if(!hasEntries){
+            System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
+        }
         backToReport();
     }
     public static void searchVendor() {
@@ -343,7 +359,6 @@ public static void report() {
                 if (vendor.equalsIgnoreCase(name)) {
                     if (!isFound) {
                         System.out.println("\n------------------------------------VENDOR--------------------------------");
-                     //   System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
                         isFound = true;
                     }
@@ -356,7 +371,7 @@ public static void report() {
             }
             System.out.println("--------------------------------------------------------------------------");
             if (!isFound) {
-                System.out.println("                    Vendor's name/company not found");
+                System.out.println("                    ❌Vendor's name/company not found❌");
                 System.out.println("--------------------------------------------------------------------------");
             }
         }
