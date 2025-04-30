@@ -99,6 +99,8 @@ public static void report() {
         boolean vendorFound = false;
         boolean descFound = false;
         boolean amountFound = false;
+        boolean startFound = false;
+        boolean endFound = false;
         float amount = 0;
         scanner.nextLine();
         System.out.println("\n-------🔎 CUSTOM SEARCH 🔍-------");
@@ -176,12 +178,15 @@ public static void report() {
                     if (endDate != null && startDate != null && startDate.isBefore(entryDate) && endDate.isAfter(entryDate)) {
                         matches = true;
                         isMatch = true;
+
                     }
                         if (!isMatch && startDate != null && endDate == null && (entryDate.isAfter(startDate) || entryDate.isEqual(startDate))) {
                         matches = true;
+                        startFound = true;
                     }
                     if (!isMatch && endDate != null && startDate == null && (entryDate.isBefore(endDate) || entryDate.isEqual(endDate))) {
                         matches = true;
+                        endFound = true;
                     }
                 if (desc != null && !desc.isEmpty() && e.getDescription().equalsIgnoreCase(desc)) {
                         matches = true;
@@ -222,6 +227,14 @@ public static void report() {
             }
             if(amount != 0 && !amountFound ){
                 System.out.println("\n❌ Amount not found: " + amount);
+                isFound = true;
+            }
+            if(startDate != null && !startFound){
+                System.out.println("\n❌ No entries found from the provided start date");
+                isFound = true;
+            }
+            if(endDate != null && !endFound){
+                System.out.println("\n❌ No entries found from the provided end date");
                 isFound = true;
             }
 

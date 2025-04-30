@@ -208,13 +208,13 @@ public class Tracker {
                 try {
                     amount = scanner.nextFloat();
                     scanner.nextLine();
-                    if (amount < 0) {
-                        System.out.println("\nAmount cannot be negative. Please enter a valid amount.");
+                    if (amount <= 0) {
+                        System.out.println("\nInvalid input. No less than $1.\n");
                         continue;
                     }
                     break;
                 } catch (InputMismatchException e) {
-                    System.out.println("\nInvalid input for amount. Please enter a valid number.\n");
+                    System.out.println("\nInvalid input. Number only.\n");
                     scanner.nextLine();
                 }
             }
@@ -229,7 +229,7 @@ public class Tracker {
 //             buff.newLine();
 //             }
             buff.write(String.format("\n%s|%s|%s|%s|%.2f",addEntry.getDate(),addEntry.getTime(),addEntry.getDescription(),addEntry.getVendor(),addEntry.getAmount()));
-            System.out.println("\nDeposit Added !");
+            System.out.println("\nDeposit Success !");
             buff.close();
 
         } catch (IOException e) {
@@ -255,14 +255,14 @@ public class Tracker {
                     amount = scanner.nextFloat();
                     scanner.nextLine();
                     if (amount < 0) {
-                        System.out.println("\nAmount cannot be negative. Please enter a valid amount.");
+                        System.out.println("\nInvalid input. No less than $1.\n");
                         continue;
                     }else{
                         amount = -amount;
                     }
                     break;
                 } catch (InputMismatchException e) {
-                    System.out.println("\nInvalid input for amount. Please enter a valid number.\n");
+                    System.out.println("\nInvalid input. Number only\n");
                     scanner.nextLine();
                 }
             }
@@ -286,7 +286,9 @@ public class Tracker {
     }
     public static void returned(){
         boolean isTrue = false;
-        System.out.println("\nDo you want to deposit again ?\n D - Deposit \n H - Home Screen \n X - Exit");
+        System.out.println("\n----------------------------------------------");
+        System.out.println(" D - Deposit Again  H - Home Screen  X - Exit");
+        System.out.println("----------------------------------------------");
 
         while(!isTrue) {
             System.out.print("\nEnter : ");
@@ -306,7 +308,9 @@ public class Tracker {
     }
     public static void payBack(){
         boolean isTrue = false;
-        System.out.println("\nDo you want to Pay again ?\n P - Payment \n H - Home Screen \n X - Exit");
+        System.out.println("\n----------------------------------------------");
+        System.out.println("   P - Pay Again  H - Home Screen  X - Exit");
+        System.out.println("----------------------------------------------");
 
         while(!isTrue) {
             System.out.print("\nEnter : ");
