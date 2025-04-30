@@ -40,11 +40,9 @@ public class Tracker {
     public static void isToLedger(){
         boolean isTrue = false;
         String input;
-        System.out.println("\n-----------------");
-        System.out.println(" H - Home Screen");
-        System.out.println(" L - Ledger Screen");
-        System.out.println(" X - Exit");
-        System.out.println("-----------------");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println(" H - Home Screen    L - Ledger Screen    X - Exit");
+        System.out.println("--------------------------------------------------");
         while(!isTrue){
             try{
                 System.out.print("\nEnter your choice: ");
@@ -58,7 +56,7 @@ public class Tracker {
                     System.out.println("\nGoodbye and great a good day");
                     System.exit(0);
                 }else{
-                    System.out.println("\nInvalid ! choose between H and X only");
+                    System.out.println("\nInvalid ! choose between H, L and X only");
                 }
             } catch (Exception e) {
                 System.out.println("\nInvalid Input");
@@ -133,39 +131,64 @@ public class Tracker {
             }
         }
     }
+    public static String truncate(String text, int maxLength) {
+        return text.length() <= maxLength ? text : text.substring(0, maxLength - 3) + "...";
+    }
     public static void showAllEntry(){
-        System.out.println("\n-------------------ALL ENTRIES----------------------------------");
-        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
-
+        System.out.println("\n-----------------------------ALL ENTRIES----------------------------------");
+       // System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
+        System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry){
-            System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(),entries.getAmount());
+          //  System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(),entries.getAmount());
+            System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
+                    entries.getDate(),
+                    entries.getTime(),
+                    truncate(entries.getDescription(), 25),
+                    truncate(entries.getVendor(), 15),
+                    entries.getAmount());
         }
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------");
         isToLedger();
     }
     public static void showDeposits(){
-        System.out.println("\n-------------------  DEPOSITS  ----------------------------------");
-        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+        System.out.println("\n----------------------------  DEPOSITS  ----------------------------------");
+        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
+        System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry) {
             if (entries.getAmount() > 0) {
-                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                //System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
+                        entries.getDate(),
+                        entries.getTime(),
+                        truncate(entries.getDescription(), 25),
+                        truncate(entries.getVendor(), 15),
+                        entries.getAmount());
             }
         }
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------");
         isToLedger();
     }
     public static void showPayments(){
-        System.out.println("\n-------------------  PAYMENTS  ----------------------------------");
-        System.out.println("  Date     -   Time   -   Description     -   Vendor   -  Amount  ");
+        System.out.println("\n----------------------------  PAYMENTS  ----------------------------------");
+        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
+        System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+
         entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
         for(Entries entries : entry) {
             if (entries.getAmount() < 0) {
-                System.out.printf("\n%s - %s - %s - %s  ➡️   %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                //System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n", entries.getDate(), entries.getTime(), entries.getDescription(), entries.getVendor(), entries.getAmount());
+                System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
+                        entries.getDate(),
+                        entries.getTime(),
+                        truncate(entries.getDescription(), 25),
+                        truncate(entries.getVendor(), 15),
+                        entries.getAmount());
             }
         }
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------");
         isToLedger();
     }
     public static void addDeposits(String file) {
@@ -186,12 +209,12 @@ public class Tracker {
                     amount = scanner.nextFloat();
                     scanner.nextLine();
                     if (amount < 0) {
-                        System.out.println("Amount cannot be negative. Please enter a valid amount.");
+                        System.out.println("\nAmount cannot be negative. Please enter a valid amount.");
                         continue;
                     }
                     break;
                 } catch (InputMismatchException e) {
-                    System.out.println("\nInvalid input for amount. Please enter a valid number.");
+                    System.out.println("\nInvalid input for amount. Please enter a valid number.\n");
                     scanner.nextLine();
                 }
             }
@@ -232,14 +255,14 @@ public class Tracker {
                     amount = scanner.nextFloat();
                     scanner.nextLine();
                     if (amount < 0) {
-                        System.out.println("Amount cannot be negative. Please enter a valid amount.");
+                        System.out.println("\nAmount cannot be negative. Please enter a valid amount.");
                         continue;
                     }else{
                         amount = -amount;
                     }
                     break;
                 } catch (InputMismatchException e) {
-                    System.out.println("\nInvalid input for amount. Please enter a valid number.");
+                    System.out.println("\nInvalid input for amount. Please enter a valid number.\n");
                     scanner.nextLine();
                 }
             }
