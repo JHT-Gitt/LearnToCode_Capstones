@@ -199,7 +199,7 @@ public static void report() {
                 }
                 if (matches) {
                     if (!isFound) {
-                        System.out.println("\n-------------------------🔎CUSTOM SEARCH🔍-------------------------------");
+                        System.out.println("\n-------------------------🔎CUSTOM SEARCH🔍------------------------------");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
                         System.out.println("-------------------------------------------------------------------------");
                         isFound = true;
@@ -247,9 +247,9 @@ public static void report() {
     public static void monthToDate() {
         boolean hasEntries = false;
         LocalDate now = LocalDate.now();
-        System.out.println("\n---------------------------MONTH TO DATE ENTRIES------------------------");
+        System.out.println("\n---------------------------MONTH TO DATE ENTRIES-------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
 
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
@@ -262,7 +262,7 @@ public static void report() {
                         Tracker.truncate(entries.getVendor(), 15),entries.getAmount());
             }
         }
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
@@ -361,9 +361,9 @@ public static void report() {
                 String name = entries.getVendor().toLowerCase();
                 if (vendor.equalsIgnoreCase(name)) {
                     if (!isFound) {
-                        System.out.println("\n------------------------------------VENDOR--------------------------------");
+                        System.out.println("\n------------------------------------VENDOR-------------------------------");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-                        System.out.println("--------------------------------------------------------------------------");
+                        System.out.println("-------------------------------------------------------------------------");
                         isFound = true;
                     }
                     System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
@@ -373,10 +373,10 @@ public static void report() {
                     isTrue = true;
                 }
             }
-            System.out.println("--------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------");
             if (!isFound) {
                 System.out.println("                    ❌Vendor's name/company not found❌");
-                System.out.println("--------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------");
             }
         }
        backToReport();
