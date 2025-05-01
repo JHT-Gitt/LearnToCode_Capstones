@@ -21,7 +21,6 @@ A CLI application managing and tracking a financial transaction for a business o
 ## SAMPLE SCREENSHOTS
 
 <img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.webp" width="200" height="300"><br>
-<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.webp" width="300" height="200"><br>
 <img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp" width="300" height="200"><br>
 
 ### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THIS:
