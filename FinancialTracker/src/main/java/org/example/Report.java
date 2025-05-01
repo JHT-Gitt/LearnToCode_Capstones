@@ -162,6 +162,7 @@ public static void report() {
                 }
                 try {
                     amount = Float.parseFloat(amountTemp);
+                    amount = Math.round(amount * 100)/ 100f;
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("\nInvalid ! number only\n");
@@ -192,7 +193,7 @@ public static void report() {
                     matches = true;
                     vendorFound =true;
                 }
-                if (amount != 0 && Math.abs(e.getAmount() - amount) <= 0.01f) {
+                if(amount !=0 && amount == e.getAmount()){
                     matches = true;
                     amountFound = true;
                 }
