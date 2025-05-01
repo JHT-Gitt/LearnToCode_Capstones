@@ -25,12 +25,12 @@ A CLI application managing and tracking a financial transaction for a business o
 <img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp" width="300" height="200"><br>
 
 ### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THIS:
->It keeps my entries organized and clean.<br>
+**It keeps my entries organized and clean.**<br>
 ![ss4](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.webp)
 ![ss5](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.webp)
 ![ss6](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss6.webp)
 
 ### CREDITS AND RESOURCES:
 - Woorkbook 1 to 3
-- [Google Search](google.com)
-- [Chatgpt(2024)](chatgpt.com)
+- [Google Search](https://google.com)
+- [Chatgpt(2024)](https://chatgpt.com)
