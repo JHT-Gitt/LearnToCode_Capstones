@@ -23,3 +23,9 @@ A CLI application managing and tracking a financial transaction for a business o
 ![ss2](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.webp)
 ![ss3](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.webp)
 ![ss1](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp)
+
+### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THIS:
+>It keeps my entries organized and clean.<br>
+![ss4](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.webp)
+![ss5](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.webp)
+![ss6](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss6.webp)
