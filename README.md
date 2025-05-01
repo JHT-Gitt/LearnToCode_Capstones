@@ -18,7 +18,8 @@ A CLI application managing and tracking a financial transaction for a business o
 > Vendor<br>
 > And the challenge yourself option **"Custom Search"**<br>
 
-## SCREENSHOT
+## SAMPLE SCREENSHOTS
 
-### HOME SCREEN
+![ss2](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.webp)
+![ss3](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.webp)
 ![ss1](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp)
