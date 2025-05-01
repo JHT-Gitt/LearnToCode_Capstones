@@ -5,4 +5,15 @@ A CLI application managing and tracking a financial transaction for a business o
 **HOME SCREEN** 
 - Add deposit entries
 - Add payment entries
-- Ledger 
+- Ledger
+**LEDGER SCREEN**
+- Display all entries, Deposits only or Payment only entries sorted by newest
+- Reports
+**REPORTS SCREEN**
+*Filterable by:*
+- Month to date
+- Previous month
+- Year to date
+- Previous year
+- Vendor
+- And the challenge yourself option "Custom Search"
