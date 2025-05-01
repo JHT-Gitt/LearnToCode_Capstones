@@ -86,7 +86,7 @@ public static void report() {
         }
 
     }
-    private static void customSearch() {
+    public static void customSearch() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = null;
         LocalDate endDate = null;
