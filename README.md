@@ -1,2 +1,2 @@
-# LearnToCode_Capstones
+# First Capstone: Accounting Ledger Application
  first capstones
