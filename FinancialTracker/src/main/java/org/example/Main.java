@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ArrayList<Entries> addEntry = Tracker.showEntry("transactions.csv");
+        ArrayList<Entries> entry = Tracker.showEntry("transactions.csv");
 
-        Tracker.menu();
+        Menus.menu(entry);
 
 
 

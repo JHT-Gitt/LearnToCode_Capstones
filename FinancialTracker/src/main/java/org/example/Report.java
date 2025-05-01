@@ -7,86 +7,12 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Report {
-    public static String file = "transaction.csv";
-   public static ArrayList<Entries> entry = Tracker.showEntry(file);
+    //    public static String file = "transactions.csv";
+//   public static ArrayList<Entries> entry = Tracker.showEntry(file);
     public static Scanner scanner = new Scanner(System.in);
-public static void report() {
-    boolean isTrue = false;
-    System.out.println("\n-------REPORTS SCREEN--------   ");
-    System.out.println("Search by:");
-    System.out.println(" 1 - Month To Date(MTD)");
-    System.out.println(" 2 - Previous Month");
-    System.out.println(" 3 - Year To Date(YTD)");
-    System.out.println(" 4 - Previous Year");
-    System.out.println(" 5 - Search by Vendor");
-    System.out.println(" 6 - Custom Search");
-    System.out.println(" 0 - Back to Ledger Screen");
-    System.out.println("-----------------------------");
-    while (!isTrue) {
-        try {
-            System.out.print("\nEnter your choice: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 0:
-                    Tracker.ledger();
-                    isTrue = true;
-                    break;
-                case 1:
-                    monthToDate();
-                    break;
-                case 2:
-                    prevMonth();
-                    break;
-                case 3:
-                    yearToDate();
-                    break;
-                case 4:
-                    prevYear();
-                    break;
-                case 5:
-                    searchVendor();
-                    break;
-                case 6:
-                    customSearch();
-                    break;
-                default:
-                    System.out.println("\nInvalid choice ! Choose only between 0 and 6");
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("\nInvalid Input");
-            scanner.nextLine();
-        }
-    }
-}
-    public static void backToReport(){
-        boolean isTrue = false;
-        System.out.println("\n-------------------------------------------------------------------------");
-        System.out.println("   H - Home Screen    L - Ledger Screen   R - Report Screen   X - Exit");
-        System.out.println("-------------------------------------------------------------------------");
-        while(!isTrue){
-            try{
-                System.out.print("\nEnter your choice: ");
-                String choice = scanner.next();
-                if(choice.equalsIgnoreCase("H")){
-                    Tracker.menu();
-                }else if(choice.equalsIgnoreCase("L")){
-                    Tracker.ledger();
-                }else if(choice.equalsIgnoreCase("R")){
-                    report();
-                }else if(choice.equalsIgnoreCase("X")){
-                    System.out.println("\nGoodbye and come again");
-                    System.exit(0);
-                }else{
-                    System.out.println("\nInvalid input ! Try again");
-                }
-            }catch (InputMismatchException e) {
-                System.out.println("\nError ! Invalid Input !");
-                scanner.nextLine();
-            }
-        }
 
-    }
-    public static void customSearch() {
+
+    public static void customSearch(ArrayList<Entries> entry) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = null;
         LocalDate endDate = null;
@@ -100,48 +26,48 @@ public static void report() {
         boolean startFound = false;
         boolean endFound = false;
         float amount = 0;
-        scanner.nextLine();
+        //  scanner.nextLine();
         System.out.println("\n-------🔎 CUSTOM SEARCH 🔍-------");
         System.out.println("\nPress Enter to skip question");
 
         while (true) {
-        while (true) {
-            System.out.print("Enter start date(yyyy-MM-dd): ");
-            String startDateTemp = scanner.nextLine().trim();
-            if (startDateTemp.isEmpty()) {
-                break;
+            while (true) {
+                System.out.print("Enter start date(yyyy-MM-dd): ");
+                String startDateTemp = scanner.nextLine().trim();
+                if (startDateTemp.isEmpty()) {
+                    break;
+                }
+                try {
+                    startDate = LocalDate.parse(startDateTemp, formatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("\nInvalid date format or value. Please try again.");
+                    System.out.println("\nPress Enter to skip filter");
+                }
+            }
+            while (true) {
+                System.out.print("Enter end date  (yyyy-MM-dd): ");
+                String endDateTemp = scanner.nextLine().trim();
+                if (endDateTemp.isEmpty()) {
+                    break;
+                }
+                try {
+                    endDate = LocalDate.parse(endDateTemp, formatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("\nInvalid date format or value. Please try again.\n");
+                }
             }
             try {
-                startDate = LocalDate.parse(startDateTemp, formatter);
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("\nInvalid date format or value. Please try again.");
-                System.out.println("\nPress Enter to skip filter");
-            }
-        }
-        while (true) {
-            System.out.print("Enter end date  (yyyy-MM-dd): ");
-            String endDateTemp = scanner.nextLine().trim();
-            if (endDateTemp.isEmpty()) {
-                break;
-            }
-            try {
-                endDate = LocalDate.parse(endDateTemp, formatter);
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("\nInvalid date format or value. Please try again.\n");
-            }
-        }
-             try {
-            if (endDate != null && startDate != null && startDate.isAfter(endDate)) {
-                startDate = null;
-                endDate = null;
-                System.out.print("\nStart Date must be before the End date.\n\n");
-            } else{
-                   break;
+                if (endDate != null && startDate != null && startDate.isAfter(endDate)) {
+                    startDate = null;
+                    endDate = null;
+                    System.out.print("\nStart Date must be before the End date.\n\n");
+                } else{
+                    break;
                 }
             }catch(NullPointerException e){
-            //scanner.nextLine();
+                //scanner.nextLine();
             }
         }
         System.out.print("Enter Description : ");
@@ -159,36 +85,38 @@ public static void report() {
             String amountTemp = scanner.nextLine();
             if (amountTemp.isEmpty()) {
                 break;
-                }
-                try {
-                    amount = Float.parseFloat(amountTemp);
-                    amount = Math.round(amount * 100)/ 100f;
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("\nInvalid ! number only\n");
-                }
+            }
+            try {
+                amount = Float.parseFloat(amountTemp);
+                amount = Math.round(amount * 100)/ 100f;
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("\nInvalid ! number only\n");
+            }
         }
         try {
             entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
             for (Entries e : entry) {
                 LocalDate entryDate = LocalDate.parse(e.getDate(), formatter);
                 boolean matches = false;
-                    if (endDate != null && startDate != null && startDate.isBefore(entryDate) && endDate.isAfter(entryDate)) {
-                        matches = true;
-                        isMatch = true;
-                    }
-                        if (!isMatch && startDate != null && endDate == null && (entryDate.isAfter(startDate) || entryDate.isEqual(startDate))) {
-                        matches = true;
-                        startFound = true;
-                    }
-                    if (!isMatch && endDate != null && startDate == null && (entryDate.isBefore(endDate) || entryDate.isEqual(endDate))) {
-                        matches = true;
-                        endFound = true;
-                    }
+                if (endDate != null && startDate != null && startDate.isBefore(entryDate) && endDate.isAfter(entryDate)) {
+                    matches = true;
+                    isMatch = true;
+                    startFound = true;
+                    endFound = true;
+                }
+                if (!isMatch && startDate != null && endDate == null && (entryDate.isAfter(startDate) || entryDate.isEqual(startDate))) {
+                    matches = true;
+                    startFound = true;
+                }
+                if (!isMatch && endDate != null && startDate == null && (entryDate.isBefore(endDate) || entryDate.isEqual(endDate))) {
+                    matches = true;
+                    endFound = true;
+                }
                 if (desc != null && !desc.isEmpty() && e.getDescription().equalsIgnoreCase(desc)) {
-                        matches = true;
-                        descFound = true;
-                    }
+                    matches = true;
+                    descFound = true;
+                }
                 if (vendor != null && !vendor.isEmpty() && e.getVendor().equalsIgnoreCase(vendor)) {
                     matches = true;
                     vendorFound =true;
@@ -240,11 +168,11 @@ public static void report() {
         }catch (DateTimeParseException e){
             //
         }catch (NullPointerException e){
-           // scanner.nextLine();
+            // scanner.nextLine();
         }
-        backToReport();
+        Menus.backToReport(entry);
     }
-    public static void monthToDate() {
+    public static void monthToDate(ArrayList<Entries> entry) {
         boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         System.out.println("\n---------------------------MONTH TO DATE ENTRIES-------------------------");
@@ -266,10 +194,10 @@ public static void report() {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        backToReport();
+        Menus.backToReport(entry);
     }
-    public static void prevMonth() {
-    boolean hasEntries = false;
+    public static void prevMonth(ArrayList<Entries> entry) {
+        boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         LocalDate previousMonth = now.minusMonths(1);
         System.out.println("\n-------------------------PREVIOUS MONTH ENTRIES--------------------------");
@@ -285,16 +213,16 @@ public static void report() {
                         entries.getDate(), entries.getTime(),
                         Tracker.truncate(entries.getDescription(), 25),
                         Tracker.truncate(entries.getVendor(), 15),entries.getAmount());
-                }
+            }
         }
 
         System.out.println("-------------------------------------------------------------------------");
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        backToReport();
+        Menus.backToReport(entry);
     }
-    public static void yearToDate() {
+    public static void yearToDate(ArrayList<Entries> entry) {
         boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         System.out.println("\n----------------------------YEAR TO DATE ENTRIES-------------------------");
@@ -317,9 +245,9 @@ public static void report() {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        backToReport();
+        Menus.backToReport(entry);
     }
-    public static void prevYear() {
+    public static void prevYear(ArrayList<Entries> entry) {
         boolean hasEntries = false;
         LocalDate now = LocalDate.now();
         LocalDate previousYear = now.minusYears(1);
@@ -342,28 +270,28 @@ public static void report() {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        backToReport();
+        Menus.backToReport(entry);
     }
-    public static void searchVendor() {
-    boolean isFound = false;
-    boolean isTrue = false;
+    public static void searchVendor(ArrayList<Entries> entry) {
+        boolean isFound = false;
+        boolean isTrue = false;
         System.out.println("\nX - Return to Report Screen");
-        scanner.nextLine();
+        // scanner.nextLine();
         while(!isTrue) {
             System.out.print("Enter Vendors name/company: ");
             String vendor = scanner.nextLine().toLowerCase();
             if(vendor.equalsIgnoreCase("x")){
                 isTrue = true;
-                report();
+                Menus.report(entry);
             }
             entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
             for (Entries entries : entry) {
                 String name = entries.getVendor().toLowerCase();
                 if (vendor.equalsIgnoreCase(name)) {
                     if (!isFound) {
-                        System.out.println("\n------------------------------------VENDOR-------------------------------");
+                        System.out.println("\n------------------------------------VENDOR--------------------------------");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-                        System.out.println("-------------------------------------------------------------------------");
+                        System.out.println("--------------------------------------------------------------------------");
                         isFound = true;
                     }
                     System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
@@ -373,12 +301,12 @@ public static void report() {
                     isTrue = true;
                 }
             }
-            System.out.println("------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------");
             if (!isFound) {
                 System.out.println("                    ❌Vendor's name/company not found❌");
-                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------");
             }
         }
-       backToReport();
+        Menus.backToReport(entry);
     }
 }

@@ -32,105 +32,11 @@ public class Tracker {
                     entry.add(addEntries);
                 }
             }
-    buff.close();
+            buff.close();
         } catch (IOException e) {
-           // System.out.println("\nError ! Something went wrong.");
+            System.out.println("\nError ! Something went wrong.");
         }
         return entry;
-    }
-    public static void isToLedger(){
-        boolean isTrue = false;
-        String input;
-        System.out.println("\n--------------------------------------------------");
-        System.out.println(" H - Home Screen    L - Ledger Screen    X - Exit");
-        System.out.println("--------------------------------------------------");
-        while(!isTrue){
-            try{
-                System.out.print("\nEnter your choice: ");
-                input = scanner.next();
-
-                if(input.equalsIgnoreCase("H")){
-                    menu();
-                }else if(input.equalsIgnoreCase("L")){
-                    ledger();
-                }else if(input.equalsIgnoreCase("X")){
-                    System.out.println("\nGoodbye and have great a day");
-                    System.exit(0);
-                }else{
-                    System.out.println("\nInvalid ! choose between H, L and X only");
-                }
-            } catch (Exception e) {
-                System.out.println("\nInvalid Input");
-                scanner.nextLine();
-            }
-        }
-    }
-    public static void menu(){
-        String input;
-        boolean isTrue = false;
-        System.out.println("\n------- HOME SCREEN -------");
-        System.out.println("| D - Add Deposit         |");
-        System.out.println("| P - Make Payment(Debit) |");
-        System.out.println("| L - Ledger              |");
-        System.out.println("| X - Exit                |");
-        System.out.println("---------------------------");
-        while(!isTrue) {
-            try {
-                System.out.print("\nEnter your choice: ");
-                input = scanner.next().toLowerCase();
-
-                if(input.equalsIgnoreCase("D")){
-                    addDeposits("transactions.csv");
-                }else if (input.equalsIgnoreCase("P")){
-                    makePayment("transactions.csv");
-                }else if (input.equalsIgnoreCase("L")) {
-                    ledger();
-                }else if(input.equalsIgnoreCase("X")){
-                    System.out.println("\nGoodbye and come again");
-                    System.exit(0);
-                }else{
-                    System.out.println("\nInvalid input! Try again.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\nError ! Invalid Input !");
-                scanner.nextLine();
-            }
-        }
-    }
-    public static void ledger(){
-        boolean isTrue = false;
-        String input;
-
-        System.out.println("\n-------------- LEDGER --------------");
-        System.out.println("| A - Display All Entries          |");
-        System.out.println("| D - Display All Deposits Entries |");
-        System.out.println("| P - Display All Payments Entries |");
-        System.out.println("| R - Reports                      |");
-        System.out.println("| H - Home Screen                  |");
-        System.out.println("------------------------------------");
-        while(!isTrue) {
-            try {
-                System.out.print("\nEnter your choice: ");
-                input = scanner.next();
-
-                if(input.equalsIgnoreCase("A")){
-                    showAllEntry();
-                }else if(input.equalsIgnoreCase("D")){
-                    showDeposits();
-                }else if(input.equalsIgnoreCase("P")){
-                    showPayments();
-                }else if(input.equalsIgnoreCase("R")){
-                    Report.report();
-                }else if(input.equalsIgnoreCase("H")){
-                    menu();
-                }else{
-                    System.out.println("\nInvalid input ! Try again");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\nInvalid Input");
-                scanner.nextLine();
-            }
-        }
     }
     public static String truncate(String text, int maxLength) {
         return text.length() <= maxLength ? text : text.substring(0, maxLength - 3) + "...";
@@ -155,7 +61,7 @@ public class Tracker {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        isToLedger();
+        Menus.isToLedger(entry);
     }
     public static void showDeposits(){
         boolean hasEntries = false;
@@ -178,7 +84,7 @@ public class Tracker {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        isToLedger();
+        Menus.isToLedger(entry);
     }
     public static void showPayments(){
         boolean hasEntries = false;
@@ -201,16 +107,16 @@ public class Tracker {
         if(!hasEntries){
             System.out.println("                     ❌  EMPTY ENTRIES  ❌ ");
         }
-        isToLedger();
+        Menus.isToLedger(entry);
     }
-    public static void addDeposits(String file) {
+    public static void addDeposits() {
         float amount;
         LocalDate today = LocalDate.now();
         LocalTime time = LocalTime.now();
         String dateToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String timeToday = time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         try {
-            scanner.nextLine();
+            //  scanner.nextLine();
             System.out.print("\nEnter description: ");
             String desc = scanner.next();
             System.out.print("Enter Vendor name: ");
@@ -230,10 +136,10 @@ public class Tracker {
                     scanner.nextLine();
                 }
             }
-        //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
+            //Entries addEntry = new Entries(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), time.format(DateTimeFormatter.ofPattern("HH:mm:ss")), desc, vendor, amount);
             Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
             entry.add(addEntry);
-            BufferedWriter buff = new BufferedWriter(new FileWriter(file, true));
+            BufferedWriter buff = new BufferedWriter(new FileWriter("transactions.csv", true));
 //            buff.write("date|time|description|vendor|amount");
 //            buff.newLine();
 //            for (Entries entries : entry) {
@@ -249,7 +155,7 @@ public class Tracker {
         }
         returned();
     }
-    public static void makePayment(String file){
+    public static void makePayment(){
         float amount;
         LocalDate today = LocalDate.now();
         LocalTime time = LocalTime.now();
@@ -280,7 +186,7 @@ public class Tracker {
             }
             Entries addEntry = new Entries(dateToday,timeToday,desc,vendor,amount);
             entry.add(addEntry);
-            BufferedWriter buff = new BufferedWriter(new FileWriter(file,true));
+            BufferedWriter buff = new BufferedWriter(new FileWriter("transactions.csv",true));
 //            buff.write("date|time|description|vendor|amount");
 //            buff.newLine();
 //            for (Entries entries : entry) {
@@ -306,10 +212,10 @@ public class Tracker {
             System.out.print("\nEnter : ");
             String enter = scanner.next();
             if (enter.equalsIgnoreCase("D")) {
-                addDeposits("transactions.csv");
+                addDeposits();
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("H")) {
-                Tracker.menu();
+                Menus.menu(entry);
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("X")) {
                 System.out.println("\nGoodbye and come again");
@@ -329,10 +235,10 @@ public class Tracker {
             System.out.print("\nEnter : ");
             String enter = scanner.next();
             if (enter.equalsIgnoreCase("P")) {
-                makePayment("transactions.csv");
+                makePayment();
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("H")) {
-                Tracker.menu();
+                Menus.menu(entry);
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("X")) {
                 System.out.println("\nGoodbye and come again");
