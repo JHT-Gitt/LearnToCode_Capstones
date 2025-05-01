@@ -20,12 +20,17 @@ A CLI application managing and tracking a financial transaction for a business o
 
 ## SAMPLE SCREENSHOTS
 
-![ss2](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.webp)
-![ss3](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.webp)
-![ss1](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp)
+![ss2]<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.webp" width="200" height="300">
+![ss3]<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.webp" width="300" height="200">
+![ss1]<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.webp" width="300" height="200">
 
 ### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THIS:
 >It keeps my entries organized and clean.<br>
 ![ss4](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.webp)
 ![ss5](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.webp)
 ![ss6](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss6.webp)
+
+### CREDITS AND RESOURCES:
+- Woorkbook 1 to 3
+- Google Search
+- Chatgpt(2024)
