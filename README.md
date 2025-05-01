@@ -30,6 +30,6 @@ A CLI application managing and tracking a financial transaction for a business o
 ![ss6](https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss6.webp)
 
 ### CREDITS AND RESOURCES:
-- Woorkbook 1 to 3
+- Workbook 1 to 3
 - [Google Search](https://google.com)
 - [Chatgpt(2024)](https://chatgpt.com/)
