@@ -139,6 +139,8 @@ public class Tracker {
         boolean hasEntries = false;
         System.out.println("\n-----------------------------ALL ENTRIES----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("--------------------------------------------------------------------------");
+
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry){
             hasEntries = true;
@@ -159,6 +161,7 @@ public class Tracker {
         boolean hasEntries = false;
         System.out.println("\n----------------------------  DEPOSITS  ----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("--------------------------------------------------------------------------");
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry) {
             if (entries.getAmount() > 0) {
@@ -181,7 +184,7 @@ public class Tracker {
         boolean hasEntries = false;
         System.out.println("\n----------------------------  PAYMENTS  ----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-
+        System.out.println("--------------------------------------------------------------------------");
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry) {
             if (entries.getAmount() < 0) {

@@ -116,7 +116,7 @@ public static void report() {
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("\nInvalid date format or value. Please try again.");
-                System.out.println("\nPress Enter to skip question");
+                System.out.println("\nPress Enter to skip filter");
             }
         }
         while (true) {
@@ -201,6 +201,7 @@ public static void report() {
                     if (!isFound) {
                         System.out.println("\n-------------------------🔎CUSTOM SEARCH🔍-------------------------------");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+                        System.out.println("-------------------------------------------------------------------------");
                         isFound = true;
                     }
                     System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
@@ -248,6 +249,8 @@ public static void report() {
         LocalDate now = LocalDate.now();
         System.out.println("\n---------------------------MONTH TO DATE ENTRIES------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("------------------------------------------------------------------------");
+
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
@@ -271,6 +274,8 @@ public static void report() {
         LocalDate previousMonth = now.minusMonths(1);
         System.out.println("\n-------------------------PREVIOUS MONTH ENTRIES--------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-------------------------------------------------------------------------");
+
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry){
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
@@ -294,6 +299,8 @@ public static void report() {
         LocalDate now = LocalDate.now();
         System.out.println("\n----------------------------YEAR TO DATE ENTRIES-------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-------------------------------------------------------------------------");
+
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
 
@@ -318,6 +325,8 @@ public static void report() {
         LocalDate previousYear = now.minusYears(1);
         System.out.println("\n--------------------------PREVIOUS YEAR ENTRIES--------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-------------------------------------------------------------------------");
+
         entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
@@ -354,6 +363,7 @@ public static void report() {
                     if (!isFound) {
                         System.out.println("\n------------------------------------VENDOR--------------------------------");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+                        System.out.println("--------------------------------------------------------------------------");
                         isFound = true;
                     }
                     System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
