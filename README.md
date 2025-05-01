@@ -2,3 +2,6 @@
 ## About: 
 A CLI application managing and tracking a financial transaction for a business or personal use.
 ## Features:
+**HOME SCREEN** - Add deposit entries
+                - Add payment entries
+                - Ledger 
