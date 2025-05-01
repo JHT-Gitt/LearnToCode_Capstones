@@ -33,4 +33,4 @@ A CLI application managing and tracking a financial transaction for a business o
 ### CREDITS AND RESOURCES:
 - Woorkbook 1 to 3
 - [Google Search](https://google.com)
-- [Chatgpt(2024)](https://chatgpt.com)
+- [Chatgpt(2024)](https://chatgpt.com/)
