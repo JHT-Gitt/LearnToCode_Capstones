@@ -4,10 +4,7 @@ import org.w3c.dom.CDATASection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Report {
     public static String file = "transaction.csv";
@@ -77,6 +74,7 @@ public static void report() {
                 }else if(choice.equalsIgnoreCase("R")){
                     report();
                 }else if(choice.equalsIgnoreCase("X")){
+                    System.out.println("\nGoodbye and come again");
                     System.exit(0);
                 }else{
                     System.out.println("\nInvalid input ! Try again");
@@ -170,15 +168,13 @@ public static void report() {
                 }
         }
         try {
-            entry.sort((e1, e2) -> e2.getDate().compareTo(e1.getDate())); // Sort newest first
-
+            entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
             for (Entries e : entry) {
                 LocalDate entryDate = LocalDate.parse(e.getDate(), formatter);
                 boolean matches = false;
                     if (endDate != null && startDate != null && startDate.isBefore(entryDate) && endDate.isAfter(entryDate)) {
                         matches = true;
                         isMatch = true;
-
                     }
                         if (!isMatch && startDate != null && endDate == null && (entryDate.isAfter(startDate) || entryDate.isEqual(startDate))) {
                         matches = true;
@@ -201,11 +197,8 @@ public static void report() {
                     amountFound = true;
                 }
                 if (matches) {
-//                    System.out.printf("\n%s ➖ %s ➖ %s ➖     %s   ➖️ %.2f\n",
-//                            e.getDate(), e.getTime(), e.getDescription(), e.getVendor(), e.getAmount());
                     if (!isFound) {
                         System.out.println("\n-------------------------🔎CUSTOM SEARCH🔍-------------------------------");
-                        //System.out.println("  Date     ➖   Time   ➖   Description     ➖   Vendor   ➖  Amount  ");
                         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
                         isFound = true;
                     }
@@ -254,7 +247,7 @@ public static void report() {
         LocalDate now = LocalDate.now();
         System.out.println("\n---------------------------MONTH TO DATE ENTRIES------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if (dateCompare.getMonth().equals(now.getMonth()) && dateCompare.getYear() == now.getYear()) {
@@ -277,7 +270,7 @@ public static void report() {
         LocalDate previousMonth = now.minusMonths(1);
         System.out.println("\n-------------------------PREVIOUS MONTH ENTRIES--------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry){
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if(dateCompare.getMonth() == previousMonth.getMonth() && dateCompare.getYear() == now.getYear()) {
@@ -300,7 +293,7 @@ public static void report() {
         LocalDate now = LocalDate.now();
         System.out.println("\n----------------------------YEAR TO DATE ENTRIES-------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
 
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
@@ -324,7 +317,7 @@ public static void report() {
         LocalDate previousYear = now.minusYears(1);
         System.out.println("\n--------------------------PREVIOUS YEAR ENTRIES--------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for (Entries entries : entry) {
             LocalDate dateCompare = LocalDate.parse(entries.getDate());
             if(dateCompare.getYear() == previousYear.getYear()){
@@ -353,7 +346,7 @@ public static void report() {
                 isTrue = true;
                 report();
             }
-            entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+            entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
             for (Entries entries : entry) {
                 String name = entries.getVendor().toLowerCase();
                 if (vendor.equalsIgnoreCase(name)) {

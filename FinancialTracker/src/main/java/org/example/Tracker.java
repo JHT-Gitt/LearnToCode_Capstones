@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -53,7 +54,7 @@ public class Tracker {
                 }else if(input.equalsIgnoreCase("L")){
                     ledger();
                 }else if(input.equalsIgnoreCase("X")){
-                    System.out.println("\nGoodbye and great a good day");
+                    System.out.println("\nGoodbye and have great a day");
                     System.exit(0);
                 }else{
                     System.out.println("\nInvalid ! choose between H, L and X only");
@@ -85,7 +86,7 @@ public class Tracker {
                 }else if (input.equalsIgnoreCase("L")) {
                     ledger();
                 }else if(input.equalsIgnoreCase("X")){
-                    System.out.println("\nGoodbye");
+                    System.out.println("\nGoodbye and come again");
                     System.exit(0);
                 }else{
                     System.out.println("\nInvalid input! Try again.");
@@ -138,7 +139,7 @@ public class Tracker {
         boolean hasEntries = false;
         System.out.println("\n-----------------------------ALL ENTRIES----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry){
             hasEntries = true;
             System.out.printf("%-12s %-10s %-25s %-15s $%-9.2f\n",
@@ -158,8 +159,7 @@ public class Tracker {
         boolean hasEntries = false;
         System.out.println("\n----------------------------  DEPOSITS  ----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
-
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry) {
             if (entries.getAmount() > 0) {
                 hasEntries = true;
@@ -182,7 +182,7 @@ public class Tracker {
         System.out.println("\n----------------------------  PAYMENTS  ----------------------------------");
         System.out.printf("%-12s %-10s %-25s %-15s %-10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
-        entry.sort((entry1, entry2) -> entry2.getDate().compareTo(entry1.getDate()));
+        entry.sort(Comparator.comparing(Entries::getDate).thenComparing(Entries::getTime).reversed());
         for(Entries entries : entry) {
             if (entries.getAmount() < 0) {
                 hasEntries = true;
@@ -209,9 +209,9 @@ public class Tracker {
         try {
             scanner.nextLine();
             System.out.print("\nEnter description: ");
-            String desc = scanner.nextLine();
+            String desc = scanner.next();
             System.out.print("Enter Vendor name: ");
-            String vendor = scanner.nextLine();
+            String vendor = scanner.next();
             while (true) {
                 System.out.print("Enter the amount you want to deposit: ");
                 try {
@@ -301,7 +301,7 @@ public class Tracker {
 
         while(!isTrue) {
             System.out.print("\nEnter : ");
-            String enter = scanner.nextLine();
+            String enter = scanner.next();
             if (enter.equalsIgnoreCase("D")) {
                 addDeposits("transactions.csv");
                 isTrue = true;
@@ -309,6 +309,7 @@ public class Tracker {
                 Tracker.menu();
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("X")) {
+                System.out.println("\nGoodbye and come again");
                 System.exit(0);
             } else {
                 System.out.println("\nInvalid input. Try again");
@@ -323,7 +324,7 @@ public class Tracker {
 
         while(!isTrue) {
             System.out.print("\nEnter : ");
-            String enter = scanner.nextLine();
+            String enter = scanner.next();
             if (enter.equalsIgnoreCase("P")) {
                 makePayment("transactions.csv");
                 isTrue = true;
@@ -331,6 +332,7 @@ public class Tracker {
                 Tracker.menu();
                 isTrue = true;
             } else if (enter.equalsIgnoreCase("X")) {
+                System.out.println("\nGoodbye and come again");
                 System.exit(0);
             } else {
                 System.out.println("\nInvalid input. Try again");
