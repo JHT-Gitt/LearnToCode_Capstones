@@ -16,7 +16,7 @@ A CLI application managing and tracking a financial transaction for a business o
 > Year to date<br>
 > Previous year<br>
 > Vendor<br>
-> Entries Summary
+> Entries Summary<br>
 > And the challenge yourself option **"Custom Search"**<br>
 
 ## SAMPLE SCREENSHOTS
@@ -29,11 +29,11 @@ A CLI application managing and tracking a financial transaction for a business o
 ### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THESE:
 #### It keeps my entries organized and clean.<br>
 
-<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.png" width="300" height="200">
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.png" width="600" height="200">
 
 #### And the custom search. <br>
 
-<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.png" width="300" height="200">
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.png" width="600" height="200">
 
 ### CREDITS AND RESOURCES:
 - Workbook 1 to 3
