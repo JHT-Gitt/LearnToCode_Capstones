@@ -21,10 +21,19 @@ A CLI application managing and tracking a financial transaction for a business o
 
 ## SAMPLE SCREENSHOTS
 
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss1.png" width="300" height="200">
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss3.png" width="300" height="200">
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss2.png" width="300" height="200">
 
-### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THIS:
-**It keeps my entries organized and clean.**<br>
 
+### THE INTERESTING PIECE OF CODE IN MY PROJECT WOULD BE THESE:
+#### It keeps my entries organized and clean.<br>
+
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss4.png" width="300" height="200">
+
+#### And the custom search. <br>
+
+<img src="https://github.com/JHT-Gitt/LearnToCode_Capstones/blob/main/ss5.png" width="300" height="200">
 
 ### CREDITS AND RESOURCES:
 - Workbook 1 to 3
