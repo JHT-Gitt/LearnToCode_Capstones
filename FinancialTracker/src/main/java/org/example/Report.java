@@ -309,4 +309,45 @@ public class Report {
         }
         Menus.backToReport(entry);
     }
+    public static void summary(ArrayList<Entries> entry) {
+        int count = 0;
+        int depositCount = 0;
+        int paymentCount = 0;
+        float depositTotal = 0;
+        float paymentTotal = 0;
+        float total =0;
+        try {
+            for (int i = 0; i < entry.size(); i++) {
+                count++;
+            }
+            System.out.println("\nTotal Entries: " + count);
+            for( Entries e : entry){
+                if(e.getAmount() > 0){
+                    depositTotal += e.getAmount();
+                    depositCount++;
+                }else if(e.getAmount() <=0){
+                    paymentTotal += e.getAmount();
+                    paymentCount++;
+                }
+            }
+            System.out.println("Total Deposits: " + depositCount);
+            System.out.println("Total Payments: " + paymentCount);
+            total = depositTotal + paymentTotal;
+            System.out.println("\n------------------------------------------");
+            System.out.println("              ENTRIES SUMMARY ");
+            System.out.println("------------------------------------------");
+            System.out.println("     TYPE                    TOTAL");
+            System.out.println("------------------------------------------");
+            System.out.printf("     DEPOSITS         -      %.2f\n", depositTotal);
+            System.out.printf("     PAYMENTS         -     %.2f\n", paymentTotal);
+            System.out.println("------------------------------------------");
+            System.out.printf("     TOTAL            -      %.2f\n", total);
+            System.out.println("------------------------------------------");
+
+            Menus.backToReport(entry);
+        } catch (Exception e) {
+            System.out.println("\nError");
+            scanner.nextLine();
+        }
+    }
 }

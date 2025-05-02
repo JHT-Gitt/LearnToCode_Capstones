@@ -84,6 +84,7 @@ public class Menus {
         System.out.println(" 4 - Previous Year");
         System.out.println(" 5 - Search by Vendor");
         System.out.println(" 6 - Custom Search");
+        System.out.println(" 7 - Entries Summary");
         System.out.println(" 0 - Back to Ledger Screen");
         System.out.println("-----------------------------");
         while (!isTrue) {
@@ -113,8 +114,11 @@ public class Menus {
                     case 6:
                         Report.customSearch(entry);
                         break;
+                    case 7:
+                        Report.summary(entry);
+                    break;
                     default:
-                        System.out.println("\nInvalid choice ! Choose only between 0 and 6");
+                        System.out.println("\nInvalid choice ! Choose only between 0 and 7");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInvalid Input");
